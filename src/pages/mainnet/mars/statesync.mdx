@@ -1,0 +1,33 @@
+---
+layout: '~/layouts/MarkdownLayout.astro'
+title: Statesync
+icon: mars
+chain: mars-1
+version: 1.0.0
+---
+### Setup
+
+- snapshot-interval= 1000
+
+### Intruction
+
+```
+sudo systemctl stop marsd
+marsd tendermint unsafe-reset-all
+
+SNAP_RPC="https://mars-rpc.genznodes.dev:443"
+
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
+PEERS=493b68efd2ce7d83274d4c0519a12f8a656b74e4@45.141.122.178:26656
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.mars/config/config.toml
+
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.mars/config/config.toml
+
+sudo systemctl restart marsd && journalctl -fu marsd -o cat
+```

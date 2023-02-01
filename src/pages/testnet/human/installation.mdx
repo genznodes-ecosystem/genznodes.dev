@@ -1,0 +1,158 @@
+---
+layout: '~/layouts/MarkdownLayout.astro'
+title: Installation Node
+icon: human
+chain: testnet-1
+version: 
+---
+## Hardware Requirements
+
+- Memory: 8 GB RAM
+- CPU: Quad-Core
+- Disk: 250 GB SSD Storage
+- Bandwidth: 1 Gbps for Download / 100 Mbps for Upload
+
+## setting vars
+
+`<YOUR_MONIKER>` change with your moniker / name of your validator in explorer
+
+```
+NODENAME=<YOUR_MONIKER>
+```
+
+save and import variable
+
+```
+echo "export NODENAME=$NODENAME" >> $HOME/.bash_profile
+if [ ! $WALLET ]; then
+	echo "export WALLET=wallet" >> $HOME/.bash_profile
+fi
+echo "export HUMAN_CHAIN_ID=testnet-1" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+```
+
+## update packages and install dependencies
+
+```
+sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+```
+
+## install go
+
+```
+ver="1.18"
+cd $HOME
+wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"
+rm "go$ver.linux-amd64.tar.gz"
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+check go 
+
+```
+go version
+```
+
+## install binary
+
+```
+cd $HOME
+git clone https://github.com/humansdotai/humans
+cd humans
+git checkout v1.0.0
+go build -o humansd cmd/humansd/main.go
+```
+
+- copy
+
+```
+sudo cp humansd /usr/local/bin/humansd
+```
+
+- check 
+
+```
+humansd version --long
+```
+
+## config app
+
+```
+humansd config chain-id $HUMAN_CHAIN_ID
+humansd config keyring-backend test
+```
+
+## init
+
+```
+humansd init $NODENAME --chain-id $HUMAN_CHAIN_ID
+```
+
+## get genesis and addrbook
+
+- genesis
+
+```
+curl -s https://human-rpc.genznodes.dev/genesis | jq -r .result.genesis > $HOME/.humans/genesis.json
+```
+
+- addrbook
+
+```
+wget -O $HOME/.human/config/addrbook.json https://raw.githubusercontent.com/Genz22/Testnet-node/main/human/addrbook.json
+```
+
+## set peers and seed
+
+```
+SEEDS=""
+PEERS="1df6735ac39c8f07ae5db31923a0d38ec6d1372b@45.136.40.6:26656,9726b7ba17ee87006055a9b7a45293bfd7b7f0fc@45.136.40.16:26656,6e84cde074d4af8a9df59d125db3bf8d6722a787@45.136.40.18:26656,eda3e2255f3c88f97673d61d6f37b243de34e9d9@45.136.40.13:26656,4de8c8acccecc8e0bed4a218c2ef235ab68b5cf2@45.136.40.12:26656"
+sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.humans/config/config.toml
+```
+
+## set minimum gas
+
+```
+sed -i 's/minimum-gas-prices =.*/minimum-gas-prices = "0.025uheart"/g' $HOME/.humans/config/app.toml
+```
+
+## reset data
+
+```
+humansd tendermint unsafe-reset-all --home $HOME/.humans
+```
+
+## create service file and start node
+
+### create 
+
+```
+sudo tee /etc/systemd/system/humansd.service > /dev/null <<EOF
+[Unit]
+Description=humansd
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which humansd) start --home $HOME/.humans
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+### start node
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable humansd
+sudo systemctl restart humansd
+journalctl -fu humansd -o cat
+```

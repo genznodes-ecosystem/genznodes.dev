@@ -1,0 +1,32 @@
+---
+layout: '~/layouts/MarkdownLayout.astro'
+title: Snapshot
+icon: planq
+chain: planq_7070-2
+version: v1.0.3
+---
+## Intruction
+
+### install lz4
+```
+sudo apt install lz4 -y
+```
+
+### reset chain data
+```
+sudo systemctl stop planqd
+planqd tendermint unsafe-reset-all --home $HOME/.planqd --keep-addr-book
+```
+
+### download data
+
+```
+curl -o - -L https://snap.genznodes.dev/snapshot/planq/planq-20230129.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.planqd
+```
+
+### start node
+
+```
+sudo systemctl restart planqd
+sudo journalctl -fu planqd -o cat
+```

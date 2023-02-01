@@ -1,0 +1,75 @@
+---
+import { Icon } from 'astro-icon';
+
+const items = [
+	[
+		{
+			title: 'Active and monitoring',
+			description:
+				'genznodes runs active, no slashing nodes with 24/7 monitoring.',
+			icon: 'tabler:rocket',
+		},
+		{
+			title: 'Provide tools',
+			description:
+				'presents snapshot , statsync , relayer and guide',
+			icon: 'tabler:components',
+		},
+		{
+			title: 'Provide node public',
+			description:
+				'genznodes presents tools public (RPC,gRPC & API).',
+			icon: 'tabler:list-check',
+		},
+	],
+	[		
+		{
+			title: 'Interchain-Explorer',
+			description:
+				'genznodes provides an explorer for the cosmos ecosystem sourced from PING.PUB .',
+			icon: 'tabler:arrows-right-left',
+		},
+		{
+			title: 'Open to new ideas and contributions to community',
+			description:
+				'contribute to the management community and build the community at the start of the launch. Grow your community with genznodes. ',
+			icon: 'tabler:bulb',
+		},
+	],
+];
+---
+
+<section class="scroll-mt-16" id="features">
+	<div class="px-4 py-16 mx-auto max-w-6xl lg:px-8 lg:py-20">
+		<div class="mb-10 md:mx-auto sm:text-center md:mb-12 max-w-3xl">
+			<p class="text-base text-primary-600 dark:text-primary-200 font-semibold tracking-wide uppercase"></p>
+			<h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+				What you get with <span class="whitespace-nowrap">genznodes</span>
+			</h2>
+			<p class="max-w-3xl mx-auto sm:text-center text-xl text-gray-600 dark:text-slate-400">
+				genznodes fully contribute in network and community.
+			</p>
+		</div>
+		<div class="grid mx-auto space-y-6 md:grid-cols-2 md:space-y-0">
+			{
+				items.map((subitems) => (
+					<div class="space-y-8 sm:px-8">
+						{subitems.map(({ title, description, icon }) => (
+							<div class="flex flex-row max-w-md">
+								<div class="mb-4 mr-4">
+									<div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-500 dark:bg-primary-700">
+										{icon && <Icon name={icon} class="w-6 h-6 text-white icon-light" />}
+									</div>
+								</div>
+								<div>
+									<h3 class="mb-3 text-xl font-bold">{title}</h3>
+									<p class="text-gray-600 dark:text-slate-400">{description}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

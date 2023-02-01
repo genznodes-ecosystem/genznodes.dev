@@ -1,0 +1,173 @@
+---
+layout: '~/layouts/MarkdownLayout.astro'
+title: Installation Node
+icon: planq
+chain: planq_7070-2
+version: v1.0.3
+---
+## Hardware requirements
+
+The following requirements are recommended for running planq:
+
+- 4 or more physical CPU cores
+- At least 500GB of SSD disk storage
+- At least 32GB of memory (RAM)
+- At least 100mbps network bandwidth
+
+## setting vars
+
+`<YOUR_MONIKER>` change with your moniker / name of your validator in explorer
+
+```
+NODENAME=<YOUR_MONIKER>
+```
+
+save and import variable
+
+```
+echo "export NODENAME=$NODENAME" >> $HOME/.bash_profile
+if [ ! $WALLET ]; then
+	echo "export WALLET=wallet" >> $HOME/.bash_profile
+fi
+echo "export PLANQ_CHAIN_ID=planq_7070-2" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+```
+
+## Install dependences
+
+```
+sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+```
+
+## Install go
+
+```
+ver="1.19"
+cd $HOME
+wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"
+rm "go$ver.linux-amd64.tar.gz"
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile
+source ~/.bash_profile
+go version
+```
+
+## Install binary
+
+```
+git clone https://github.com/planq-network/planq.git
+cd planq
+git fetch
+git checkout v1.0.3
+make install
+```
+
+Verify that you've installed planq successfully
+
+```
+planqd version
+```
+
+## Config app
+
+```
+planqd config chain-id planq_7070-2
+planqd config keyring-backend file
+```
+
+## Initialize Node
+
+```
+planqd init $NODENAME --chain-id $PLANQ_CHAIN_ID
+```
+
+## Get genesis and addrbook
+
+- genesis
+
+```
+wget https://raw.githubusercontent.com/planq-network/networks/main/mainnet/genesis.json
+mv genesis.json ~/.planqd/config/
+```
+
+- addrbook
+
+```
+NA
+```
+
+## Set peers and seeds
+
+```
+SEEDS=`curl -sL https://raw.githubusercontent.com/planq-network/networks/main/mainnet/seeds.txt | awk '{print $1}' | paste -s -d, -`
+PEERS=`curl -sL https://raw.githubusercontent.com/planq-network/networks/main/mainnet/peers.txt | sort -R | head -n 10 | awk '{print $1}' | paste -s -d, -`
+
+sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.planqd/config/config.toml
+```
+
+## config pruning
+
+```
+PRUNING="custom"
+PRUNING_KEEP_RECENT="1000"
+PRUNING_INTERVAL="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$PRUNING\"/" $HOME/.planqd/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \
+\"$PRUNING_KEEP_RECENT\"/" $HOME/.planqd/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \
+\"$PRUNING_INTERVAL\"/" $HOME/.planqd/config/app.toml
+```
+
+## set timeout
+
+```
+TIMEOUT=1s
+
+sed -i -e "s/^timeout_commit *=.*/timeout_commit = \
+\"$TIMEOUT\"/" $HOME/.planqd/config/config.toml
+```
+
+## set inbound and out peers
+
+```
+INBOUND=120
+OUTBOUND=60
+
+sed -i -e "s/^max_num_inbound_peers *=.*/max_num_inbound_peers = \
+\"$INBOUND\"/" $HOME/.planqd/config/config.toml
+sed -i -e "s/^max_num_outbound_peers *=.*/max_num_outbound_peers = \
+\"$OUTBOUND\"/" $HOME/.planqd/config/config.toml
+```
+
+## create service file and start node
+
+- create
+
+```
+sudo tee /etc/systemd/system/planqd.service > /dev/null <<EOF
+[Unit]
+Description=planqd
+After=network-online.target
+
+[Service]
+User=root
+ExecStart=$(which planqd) start --home $HOME/.planqd
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+- enable service and start
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable planqd
+sudo systemctl restart planqd
+sudo journalctl -fu planqd -o cat
+```

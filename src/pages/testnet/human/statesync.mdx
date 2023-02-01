@@ -1,0 +1,33 @@
+---
+layout: '~/layouts/MarkdownLayout.astro'
+title: Statesync
+icon: human
+chain: testnet-1
+version: 
+---
+### Setup
+
+- snapshot-interval= 1000
+
+### Intruction
+
+```
+sudo systemctl stop humansd
+humansd tendermint unsafe-reset-all --home $HOME/.humans --keep-addr-book
+
+SNAP_RPC="https://test-human-rpc.genznodes.dev:443"
+
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
+peers="0085de6a538d9ec1b3a63d6e77f4ae941bb63e2f@109.123.254.36:28656"
+sed -i 's|^persistent_peers *=.*|persistent_peers = "'$peers'"|' $HOME/.humans/config/config.toml
+
+sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.humans/config/config.toml
+
+sudo systemctl restart humansd && sudo journalctl -fu humansd -o cat
+```

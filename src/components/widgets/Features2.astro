@@ -1,0 +1,90 @@
+---
+import { Icon } from 'astro-icon';
+
+
+const items = [
+	{
+		title: 'Dyson',
+		description:
+			'IBC ecosystem ⚛',
+		icon: 'dyson',
+		Link: 'https://genznodes.dev/mainnet/dyson',
+	},
+	{
+		title: 'Lum Network',
+		description:
+			'IBC ecosystem ⚛',
+		icon: 'lum',
+		Link: 'https://genznodes.dev/mainnet/lum',
+	},
+	{
+		title: 'Mars',
+		description:
+			'mars-1',
+		icon: 'mars',
+		Link: 'https://genznodes.dev/mainnet/mars',
+	},
+	{
+		title: 'Meme',
+		description:
+			'IBC ecosystem ⚛',
+		icon: 'meme',
+		Link: 'https://genznodes.dev/mainnet/meme',
+	},
+	{
+		title: 'Mises',
+		description:
+			'IBC ecosystem ⚛',
+		icon: 'mises',
+		Link: 'https://genznodes.dev/mainnet/mises',
+	},
+	{
+		title: 'Newrl',
+		description:
+			'Mainnet',
+		icon: 'newrl',
+		Link: 'https://genznodes.dev/mainnet/newrl',
+	},
+	{
+		title: 'Planq',
+		description:
+			'IBC ecosystem ⚛',
+		icon: 'planq',
+		Link: 'https://genznodes.dev/mainnet/planq',
+	},
+];
+---
+
+<section class="scroll-mt-16" id="features2">
+	<div class="absolute inset-0 bg-primary-50 dark:bg-slate-800 pointer-events-none mb-32" aria-hidden="true"></div>
+	<div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="py-4 pt-8 sm:py-6 lg:py-8 lg:pt-12">
+			<div class="mb-8 text-center">
+				<h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
+					Mainnet - Live 
+				</h2>
+				<p class="max-w-3xl mx-auto text-center text-xl text-gray-600 dark:text-slate-400">
+					stake with genznodes with low commission and earn pasiv income 🚀
+				</p>
+			</div>
+			<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start my-12 dark:text-white">
+				{
+					items.map(({ title, description, icon , Link }) => (
+						<div class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded shadow-xl hover:shadow-lg transition dark:border dark:border-slate-800">
+							<div class="flex items-center mb-4">
+								<Icon name={icon} class="w-12 h-12" />
+								<div class="ml-4 text-xl font-bold">{title}</div>
+							</div>
+							<p class="text-gray-500 dark:text-gray-400 text-md items-center font font-semibold">{description}</p>
+							<div class="flex w-full sm:w-auto p-1">
+							<a
+								class="btn bg-primary-400 w-full hover:bg-blue-400"
+								href={Link}>Get In</a>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>

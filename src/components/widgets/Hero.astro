@@ -1,0 +1,59 @@
+---
+import { Picture } from '@astrojs/image/components'
+---
+
+<section class="relative md:-mt-[76px]">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6" id="hero">
+		<div class="py-12 md:py-20">
+			<div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
+				<h1 class="text-5xl md:text-[3.50rem] font-bold leading-tighter tracking-tighter mb-6 font-heading">
+					genznodes ⚛					
+				</h1>
+				<div class="max-w-2xl mx-auto">
+					<p class="text-xl text-gray-600 mb-2 dark:text-slate-400">
+						IBC Relayer & Staking Service Provider with 24/7 monitoring						
+					</p>
+					<p class="text-xl font-bold text-gray-600 mb-2 dark:text-slate-400">
+						Stake and Earn Your Rewards	💸			
+					</p>
+					<p class="text-xl text-gray-600 mb-8 dark:text-slate-400">
+						we also support early launch of dapps , marketplaces and others . has experience in testing dapps in the past						
+					</p>
+					<div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4">
+						<!-- <div class="flex w-full sm:w-auto">
+							<a
+								class="btn btn-primary sm:mb-0 w-full"
+								href="https://github.com/onwidget/astrowind"
+								target="_blank"
+								rel="noopener"
+							>
+								<Icon name="tabler:download" class="w-5 h-5 mr-1 -ml-1.5" /> Get template
+							</a>
+						</div> -->
+						<div class="flex w-full sm:w-auto">
+							<a
+								class="btn w-full"
+								href="#features">Learn more</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="relative m-auto max-w-4xl">
+					<Picture
+						src={import('~/assets/images/staking.png')}
+						class="mx-auto rounded-md w-full"
+						widths={[400, 768, 1480, 3124]}
+						sizes="(max-width: 3124px) 886px, (max-width: 1479px) 768px, 1480px"
+						alt="Hero Image"
+						aspectRatio={3124/886}
+						loading="eager"
+						width={3124}
+						height={886}
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
