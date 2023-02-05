@@ -16,10 +16,16 @@ const items = [
 			icon: 'tabler:components',
 		},
 		{
-			title: 'Provide node public',
+			title: 'Endpoints',
 			description:
 				'genznodes presents tools public (RPC,gRPC & API).',
 			icon: 'tabler:list-check',
+		},
+		{
+			title: 'IBC Relayers',
+			description:
+				'contribute to IBC transfers',
+			icon: 'tabler:arrows-right-left',
 		},
 	],
 	[		
@@ -34,7 +40,7 @@ const items = [
 			description:
 				'contribute to the management community and build the community at the start of the launch. Grow your community with genznodes. ',
 			icon: 'tabler:bulb',
-		},
+		},		
 	],
 ];
 ---
@@ -44,7 +50,7 @@ const items = [
 		<div class="mb-10 md:mx-auto sm:text-center md:mb-12 max-w-3xl">
 			<p class="text-base text-primary-600 dark:text-primary-200 font-semibold tracking-wide uppercase"></p>
 			<h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
-				What you get with <span class="whitespace-nowrap">genznodes</span>
+				genznodes feature <span class="whitespace-nowrap"></span>
 			</h2>
 			<p class="max-w-3xl mx-auto sm:text-center text-xl text-gray-600 dark:text-slate-400">
 				genznodes fully contribute in network and community.
@@ -58,7 +64,7 @@ const items = [
 							<div class="flex flex-row max-w-md">
 								<div class="mb-4 mr-4">
 									<div class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-500 dark:bg-primary-700">
-										{icon && <Icon name={icon} class="w-6 h-6 text-white icon-light" />}
+										{icon && <Icon name={icon} class="w-6 h-6 text-gray icon-dark" />}
 									</div>
 								</div>
 								<div>

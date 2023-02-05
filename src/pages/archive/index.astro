@@ -12,32 +12,28 @@ const meta = {
 
 const items = [
 	{
-		title: 'Celestia',
-		description:
-			'mocha',
-		icon: 'celestia',
-		Link: 'https://genznodes.dev/testnet/celestia',
-	},
-	{
-		title: 'Fleek',
-		description:
-			'ursa',
-		icon: 'fleek',
-		Link: 'https://genznodes.dev/testnet/fleek',
-	},
-	{
-		title: 'Gitopia',
+		title: 'Adamnitehq',
 		description:
 			'testnet',
-		icon: 'gitopia',
-		Link: 'https://genznodes.dev/testnet/gitopia',
+		icon: 'adamnitehq',
 	},
 	{
-		title: 'Human',
+		title: 'Aleo',
 		description:
-			'testnet-1',
-		icon: 'human',
-		Link: 'https://genznodes.dev/testnet/human',
+			'testnet',
+		icon: 'aleo',
+	},
+	{
+		title: 'Dusk-network',
+		description:
+			'testnet',
+		icon: 'dusk',
+	},
+	{
+		title: 'Exorde',
+		description:
+			'testnet',
+		icon: 'exorde',
 	},
 	{
 		title: 'Inery',
@@ -47,88 +43,52 @@ const items = [
 		Link: 'https://genznodes.dev/testnet/inery',
 	},
 	{
-		title: 'Lava',
+		title: 'Loyal',
 		description:
 			'testnet',
-		icon: 'lava',
-		Link: 'https://genznodes.dev/testnet/lava',
+		icon: 'loyal',
 	},
 	{
 		title: 'Mars',
 		description:
 			'ares-1',
 		icon: 'mars',
-		Link: 'https://genznodes.dev/testnet/mars',
 	},
 	{
-		title: 'Mun',
+		title: 'Near',
 		description:
-			'testmun',
-		icon: 'mun',
-		Link: 'https://genznodes.dev/testnet/mun',
+			'stake-wars III',
+		icon: 'near',
 	},
 	{
-		title: 'Nibiru',
+		title: 'Neutron',
 		description:
 			'testnet',
-		icon: 'nibiru',
-		Link: 'https://genznodes.dev/testnet/nibiru',
+		icon: 'neutron',
 	},
 	{
-		title: 'Nolus',
-		description:
-			'nolus-rila',
-		icon: 'nolus',
-		Link: 'https://genznodes.dev/testnet/nolus',
-	},
-	{
-		title: 'Obol',
-		description:
-			'bia-testnet',
-		icon: 'obol',
-		Link: 'https://genznodes.dev/testnet/obol',
-	},
-	{
-		title: 'Power DCloud',
+		title: 'Newrl',
 		description:
 			'testnet',
-		icon: 'power',
-		Link: 'https://genznodes.dev/testnet/power-dcloud',
+		icon: 'newrl',
 	},
 	{
-		title: 'Q-blockchain',
+		title: 'Nulink',
 		description:
 			'testnet',
-		icon: 'qblockchain',
-		Link: 'https://genznodes.dev/testnet/q',
+		icon: 'nulink',
 	},
 	{
-		title: 'Realio',
+		title: 'Stratos',
 		description:
 			'testnet',
-		icon: 'realio',
-		Link: 'https://genznodes.dev/testnet/realio',
+		icon: 'stratos',
 	},
 	{
-		title: 'Sge',
-		description:
-			'sge-testnet-1',
-		icon: 'sge',
-		Link: 'https://genznodes.dev/testnet/sge',
-	},
-	{
-		title: 'Taiko',
+		title: 'Subspace',
 		description:
 			'testnet',
-		icon: 'taiko',
-		Link: 'https://genznodes.dev/testnet/taiko',
-	},
-	{
-		title: 'Wormholes',
-		description:
-			'testnet',
-		icon: 'wormholes',
-		Link: 'https://genznodes.dev/testnet/wormholes',
+		icon: 'subspace',
 	},
 ];
 ---
@@ -140,26 +100,21 @@ const items = [
 			<div class="mb-8 text-center">
 				<!-- <p class="text-base text-primary-600 dark:text-primary-200 font-semibold tracking-wide uppercase">Components</p> -->
 				<h2 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading">
-					Testnet - Live
+					Archive - project 📛
 				</h2>
 				<p class="max-w-3xl mx-auto text-center text-xl text-gray-600 dark:text-slate-400">
-					genznodes also supports testnet , devnet and network early launch
+					participated in a testnet in the past or is no longer running
 				</p>
 			</div>
 			<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start my-12 dark:text-white">
 				{
-					items.map(({ title, description, icon , Link }) => (
+					items.map(({ title, description, icon }) => (
 						<div class="relative flex flex-col p-6 bg-white dark:bg-slate-900 rounded shadow-xl hover:shadow-lg transition dark:border dark:border-slate-800">
 							<div class="flex items-center mb-4">
 								<Icon name={icon} class="w-12 h-12" />
 								<div class="ml-4 text-xl font-bold">{title}</div>
-							</div>
-							<p class="text-gray-500 dark:text-gray-400 text-md">{description}</p>
-							<div class="flex w-full sm:w-auto">
-							<a 
-								class="btn bg-primary-400 w-full hover:bg-blue-400"
-								href={Link}>Get In</a>		
-							</div>						
+							</div>                          
+							<p class="text-gray-500 dark:text-gray-400 text-md">{description}</p>												
 						</div>
 					))
 				}

@@ -13,7 +13,7 @@ import { getHomePermalink } from '~/utils/permalinks';
 	<div class="py-3 px-3 mx-auto w-full md:flex md:justify-between max-w-6xl md:px-4">
 		<div class="flex justify-between">
 			<a class="flex items-center" href={getHomePermalink()}>
-				<Icon name="logo" class="w-12 h-12" />
+				<Icon name="logo" class="w-10 h-10" />
 			</a>
 			<div class="flex items-center md:hidden">
 				<ToggleMenu />
@@ -26,7 +26,7 @@ import { getHomePermalink } from '~/utils/permalinks';
 			<ul class="flex flex-col pt-8 md:pt-0 md:flex-row md:self-center w-full md:w-auto text-xl md:text-base">
 				<li class="dropdown">
 					<button
-						class="font-medium hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
+						class="font-bold hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
 						>Pages</button
 					>
 					<ul
@@ -41,18 +41,33 @@ import { getHomePermalink } from '~/utils/permalinks';
 								class="rounded-t md:hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4 block whitespace-no-wrap"
 								href="#features">Features</a>
 						</li>								
+						<li class="">
+							<a
+								class="rounded-t md:hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4 block whitespace-no-wrap"
+								href="#mainnet">Mainnet</a>
+						</li>								
+						<li class="">
+							<a
+								class="rounded-t md:hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4 block whitespace-no-wrap"
+								href="#testnet">Testnet</a>
+						</li>								
+						<li class="">
+							<a
+								class="rounded-t md:hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-4 block whitespace-no-wrap"
+								href="#email">Partner</a>
+						</li>								
 					</ul>
 				</li>		
 				<li>
 					<a
-						class="font-medium hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
-						href="https://medium.com/@genzbit">Blog</a
+						class="font-bold hover:bg-gray-100 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
+						href="https://medium.com/@genznodes">Blog</a
 					>
 				</li>
 				<li class="md:hidden">
 					<a
 						class="font-bold hover:text-gray-900 dark:hover:text-white px-4 py-3 flex items-center transition duration-150 ease-in-out"
-						href="https://github.com/Genz22"
+						href="https://github.com/genznodes-ecosystem"
 						>Github
 					</a>
 				</li>
@@ -67,11 +82,18 @@ import { getHomePermalink } from '~/utils/permalinks';
 						<Icon name="tabler:rss" class="w-5 h-5" />
 					</a> -->
 					<a
-						href="https://github.com/Genz22"
+						href="https://github.com/genznodes-ecosystem"
 						class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
-						aria-label="Astrowind Github"
+						aria-label="Github"
 					>
 						<Icon name="tabler:brand-github" class="w-5 h-5" />
+					</a>
+					<a
+						href="https://t.me/GenzDrops"
+						class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+						aria-label="Telegram"
+					>
+						<Icon name="telegram" class="w-5 h-5 bg-transparent" />
 					</a>
 				</div>
 			</div>
