@@ -7,19 +7,20 @@ const links = [
 		title: 'Tools',
 		items: [			
 			{ title: 'Explorer', href: 'https://explorer.genznodes.dev' }, 
-			{ title: 'Testnet - Explorer', href: 'https://testnet-explorer.genznodes.dev' },
-			{ title: 'IBC Relayer', href: 'https://genznodes.dev/relayer' }, 
-			{ title: 'gRPC', href: 'https://genznodes.dev/grpc' },
-			{ title: 'API', href: 'https://genznodes.dev/rest' },
-			{ title: 'RPC', href: 'https://genznodes.dev/rpc' },
+			{ title: 'Testnet - Explorer', href: 'https://testnet-explorer.genznodes.dev' }, 
+			{ title: 'StateSync', href: '#' },
+			{ title: 'gRPC', href: '#' },
+			{ title: 'API', href: '#' },
+			{ title: 'RPC', href: '#' },
 		],
 	},
 	{
-		title: 'Networks',
+		title: 'Services',
 		items: [
 			{ title: 'Mainnet', href: 'https://genznodes.dev/#features2' },
 			{ title: 'Testnet', href: 'https://genznodes.dev/testnet' },
-			{ title: 'Archive - project', href: 'https://genznodes.dev/archive' },		
+			{ title: 'Archive - project', href: 'https://genznodes.dev/archive' },
+			{ title: 'IBC Relayer', href: 'https://genznodes.dev/relayer' },
 		],
 	},
 	{
@@ -36,20 +37,16 @@ const links = [
 const social = [
 	{ label: 'Twitter', icon: 'tabler:brand-twitter', href: 'https://twitter.com/genznodes' },
 	{ label: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/Genz22' },
-	{ label: 'Mail', icon: 'tabler:mail', href: 'mailto:genzbit@genznodes.dev' },
+	{ label: 'Mail', icon: 'tabler:mail', href: 'mailto:genznodes@gmail.com' },
 ];
 ---
 
-<section class="relative" id="footer">
-<footer class="border-t border-slate-800 bg-white dark:border-slate-800">
+<footer class="border-t border-gray-200 dark:border-slate-800">
 	<div class="max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
 			<div class="col-span-12 lg:col-span-4">
-				<div class="mb-2">					
-					<a class="inline-block font-bold text-xl" href={getHomePermalink()}>
-						<Icon name="logo" class="w-4 h-4" />
-						genznodes
-					</a>
+				<div class="mb-2">
+					<a class="inline-block font-bold text-xl" href={getHomePermalink()}>genznodes</a>
 				</div>
 				<div class="text-sm text-gray-600">
 					<a
@@ -65,7 +62,7 @@ const social = [
 			{
 				links.map(({ title, items }) => (
 					<div class="col-span-6 md:col-span-3 lg:col-span-2">
-						<div class="text-gray-800 dark:text-gray-300 font-bold mb-2">{title}</div>
+						<div class="text-gray-800 dark:text-gray-300 font-medium mb-2">{title}</div>
 						{items && Array.isArray(items) && items.length > 0 && (
 							<ul class="text-sm">
 								{items.map(({ title, href }) => (
@@ -106,10 +103,9 @@ const social = [
 					class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 float-left rounded-sm bg-[url()]"
 				>
 				</span>
-				Made by <a class="text-blue-600 hover:underline dark:text-gray-200" href={getHomePermalink()}> ©genznodes</a> ·
+				Made by <a class="text-blue-600 hover:underline dark:text-gray-200" href="#"> genznodes</a> ·
 				All rights reserved.
 			</div>
 		</div>
 	</div>
 </footer>
-</section>
